@@ -1,0 +1,29 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: heroes-factory-mysql
+    restart: unless-stopped
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: heroes_factory
+      MYSQL_USER: heroes
+      MYSQL_PASSWORD: heroes_password
+      MYSQL_ROOT_PASSWORD: root_password
+      TZ: America/Sao_Paulo
+    command:
+      [
+        "mysqld",
+        "--character-set-server=utf8mb4",
+        "--collation-server=utf8mb4_unicode_ci"
+      ]
+    volumes:
+      - heroes_mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uheroes", "-pheroes_password"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  heroes_mysql_data:

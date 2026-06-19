@@ -1,0 +1,30 @@
+{
+  "name": "heroes-factory",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Full stack Hero Factory challenge with React, Node.js and MySQL.",
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -n api,web -c blue,magenta \"npm run dev -w @heroes-factory/api\" \"npm run dev -w @heroes-factory/web\"",
+    "build": "npm run build -ws --if-present",
+    "typecheck": "npm run typecheck -ws --if-present",
+    "lint": "npm run lint -ws --if-present",
+    "test": "npm run test -ws --if-present",
+    "format": "prettier --write ."
+  },
+  "keywords": [
+    "react",
+    "nodejs",
+    "mysql",
+    "typescript",
+    "docker"
+  ],
+  "author": "Jean Silva",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "prettier": "^3.4.2"
+  }
+}
