@@ -7,7 +7,7 @@ import { z } from 'zod';
 import { Button } from './ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from './ui/dialog';
 import { Input } from './ui/input';
-import { toDateInputValue } from '@/lib/utils';
+import { formatDate, toDateInputValue } from '@/lib/utils';
 import type { Hero, HeroPayload } from '@/types/hero';
 
 const heroFormSchema = z.object({
@@ -66,7 +66,7 @@ export function HeroFormModal({ open, mode, hero, isSubmitting, onOpenChange, on
   const description =
     mode === 'create'
       ? 'Cadastre um herói com suas principais características e habilidades.'
-      : 'Atualize somente os campos permitidos pelo desafio.';
+      : 'Todos os dados do herói estão visíveis. Somente os campos permitidos podem ser editados.';
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -75,6 +75,8 @@ export function HeroFormModal({ open, mode, hero, isSubmitting, onOpenChange, on
           <DialogTitle>{title}</DialogTitle>
           <DialogDescription>{description}</DialogDescription>
         </DialogHeader>
+
+        {mode === 'edit' && hero && <ReadonlyHeroSummary hero={hero} />}
 
         <form className="grid gap-5" onSubmit={form.handleSubmit(onSubmit)}>
           <div className="grid gap-4 md:grid-cols-2">
@@ -115,6 +117,37 @@ export function HeroFormModal({ open, mode, hero, isSubmitting, onOpenChange, on
         </form>
       </DialogContent>
     </Dialog>
+  );
+}
+
+interface ReadonlyHeroSummaryProps {
+  hero: Hero;
+}
+
+function ReadonlyHeroSummary({ hero }: ReadonlyHeroSummaryProps) {
+  return (
+    <div className="grid gap-3 rounded-3xl border border-slate-200 bg-slate-50 p-4 text-sm md:grid-cols-2">
+      <ReadonlyItem label="ID" value={hero.id} />
+      <ReadonlyItem label="Status" value={hero.is_active ? 'Ativo' : 'Inativo'} />
+      <ReadonlyItem label="Criado em" value={formatDate(hero.created_at)} />
+      <ReadonlyItem label="Atualizado em" value={formatDate(hero.updated_at)} />
+    </div>
+  );
+}
+
+interface ReadonlyItemProps {
+  label: string;
+  value: string;
+}
+
+function ReadonlyItem({ label, value }: ReadonlyItemProps) {
+  return (
+    <div className="min-w-0">
+      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">{label}</p>
+      <p className="truncate font-semibold text-slate-700" title={value}>
+        {value}
+      </p>
+    </div>
   );
 }
 

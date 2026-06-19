@@ -26,7 +26,8 @@
 | Clicar no herói abre detalhes | Implementado | `HeroDetailsModal` |
 | Paginação com 10 registros | Implementado | `perPage=10` |
 | 5 registros por linha | Implementado | Grid responsivo com 5 colunas em telas grandes |
-| Modal de edição com campos permitidos | Implementado | Nome, apelido, nascimento, universo, habilidade, avatar |
+| Modal de edição mostra todos os dados | Implementado | Dados de sistema aparecem como somente leitura |
+| Campos editáveis seguem a regra | Implementado | Nome, apelido, nascimento, universo, habilidade e avatar |
 | RESTful | Implementado | Rotas REST |
 | Sem autenticação | Implementado | Nenhuma camada de auth |
 | Testes | Implementado | Unitários de casos de uso |

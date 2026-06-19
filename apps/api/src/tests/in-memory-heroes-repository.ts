@@ -53,7 +53,7 @@ export class InMemoryHeroesRepository implements HeroesRepository {
       throw new Error('Hero not found');
     }
 
-    const hero = {
+    const hero: Hero = {
       ...currentHero,
       ...data,
       updated_at: new Date()
@@ -64,10 +64,28 @@ export class InMemoryHeroesRepository implements HeroesRepository {
   }
 
   async deactivate(id: string): Promise<Hero> {
-    return this.update(id, { is_active: false } as UpdateHeroInput & { is_active: boolean });
+    return this.setActiveStatus(id, false);
   }
 
   async activate(id: string): Promise<Hero> {
-    return this.update(id, { is_active: true } as UpdateHeroInput & { is_active: boolean });
+    return this.setActiveStatus(id, true);
+  }
+
+  private async setActiveStatus(id: string, isActive: boolean): Promise<Hero> {
+    const index = this.heroes.findIndex((hero) => hero.id === id);
+    const currentHero = this.heroes[index];
+
+    if (!currentHero) {
+      throw new Error('Hero not found');
+    }
+
+    const hero: Hero = {
+      ...currentHero,
+      is_active: isActive,
+      updated_at: new Date()
+    };
+
+    this.heroes[index] = hero;
+    return hero;
   }
 }
