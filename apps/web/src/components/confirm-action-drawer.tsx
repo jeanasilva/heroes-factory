@@ -28,7 +28,7 @@ export function ConfirmActionDrawer({
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent side="bottom" className="px-6 pb-8 pt-6" showClose={false}>
         <div className="mx-auto w-full max-w-lg">
-          <div className="mx-auto mb-4 h-1 w-12 rounded-full bg-slate-200" aria-hidden />
+          <div className="mx-auto mb-4 h-1 w-12 rounded-full bg-slate-200 dark:bg-slate-700" aria-hidden />
 
           <SheetHeader className="text-center sm:text-left">
             <SheetTitle>{isActivate ? 'Reativar herói?' : 'Excluir herói?'}</SheetTitle>
@@ -39,9 +39,9 @@ export function ConfirmActionDrawer({
             </SheetDescription>
           </SheetHeader>
 
-          <div className="mt-5 rounded-2xl border border-slate-200 bg-slate-50 p-4">
-            <p className="font-semibold text-slate-900">{hero.nickname}</p>
-            <p className="text-sm text-slate-500">{hero.name}</p>
+          <div className="mt-5 rounded-2xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-900/70">
+            <p className="font-semibold text-slate-900 dark:text-slate-100">{hero.nickname}</p>
+            <p className="text-sm text-slate-500 dark:text-slate-400">{hero.name}</p>
           </div>
 
           <div className="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
