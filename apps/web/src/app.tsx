@@ -191,8 +191,10 @@ export function App() {
     <>
       <AppSplash visible={splashVisible} />
 
-      <main className={`min-h-screen bg-slate-50 transition-opacity duration-500 ${splashVisible ? 'opacity-0' : 'opacity-100'}`}>
-        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+      <main className={`min-h-screen bg-slate-50 text-slate-950 transition-[background-color,color,opacity] duration-500 dark:bg-slate-950 dark:text-slate-100 ${splashVisible ? 'opacity-0' : 'opacity-100'}`}>
+        <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_top_left,rgba(99,102,241,0.14),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(124,58,237,0.12),transparent_30%)] dark:bg-[radial-gradient(circle_at_top_left,rgba(99,102,241,0.20),transparent_36%),radial-gradient(circle_at_bottom_right,rgba(14,165,233,0.12),transparent_34%)]" />
+
+        <div className="relative mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
           <AppBanner
             activeCount={activeCount}
             inactiveCount={inactiveCount}
@@ -200,15 +202,15 @@ export function App() {
             onCreate={handleCreate}
           />
 
-          <div className="mt-8 rounded-[2rem] border border-slate-200 bg-white p-4 shadow-sm md:p-5">
+          <div className="mt-8 rounded-[2rem] border border-slate-200 bg-white/90 p-4 shadow-sm backdrop-blur md:p-5 dark:border-slate-800 dark:bg-slate-900/80">
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
               <div>
-                <h2 className="text-xl font-black text-slate-950">Heróis cadastrados</h2>
-                <p className="text-sm text-slate-500">Do mais recente para o mais antigo.</p>
+                <h2 className="text-xl font-black text-slate-950 dark:text-slate-50">Heróis cadastrados</h2>
+                <p className="text-sm text-slate-500 dark:text-slate-400">Do mais recente para o mais antigo.</p>
               </div>
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
                 <div className="relative w-full sm:w-72">
-                  <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+                  <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400 dark:text-slate-500" />
                   <Input
                     value={search}
                     onChange={(event) => setSearch(event.target.value)}
@@ -217,7 +219,7 @@ export function App() {
                     aria-busy={isRefreshing}
                   />
                   {isRefreshing && (
-                    <Loader2 className="absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 animate-spin text-indigo-500" />
+                    <Loader2 className="absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 animate-spin text-indigo-500 dark:text-indigo-300" />
                   )}
                 </div>
                 <Button className="h-11 shrink-0 rounded-2xl px-5 sm:hidden" onClick={handleCreate}>
@@ -229,7 +231,7 @@ export function App() {
 
           <section className="relative mt-6">
             {isRefreshing && (
-              <div className="pointer-events-none absolute inset-0 z-10 rounded-3xl bg-white/50 backdrop-blur-[1px]" />
+              <div className="pointer-events-none absolute inset-0 z-10 rounded-3xl bg-white/50 backdrop-blur-[1px] dark:bg-slate-950/40" />
             )}
 
             {isInitialLoading ? (
