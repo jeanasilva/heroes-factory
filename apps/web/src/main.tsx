@@ -19,7 +19,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <App />
-      <Toaster richColors position="top-right" closeButton />
+      <Toaster richColors position="top-right" closeButton theme="system" />
     </QueryClientProvider>
   </React.StrictMode>
 );
