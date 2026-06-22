@@ -11,12 +11,13 @@ interface PaginationProps {
 
 export function Pagination({ page, totalPages, total, isLoading = false, onChangePage }: PaginationProps) {
   return (
-    <div className="mt-8 flex flex-col items-center justify-between gap-4 rounded-3xl border border-white bg-white/80 p-4 shadow-sm sm:flex-row">
-      <p className="text-sm text-slate-500">
-        Página <strong className="text-slate-900">{page}</strong> de <strong className="text-slate-900">{totalPages}</strong> ·{' '}
-        {total} {total === 1 ? 'herói' : 'heróis'}
+    <div className="mt-8 flex flex-col items-center justify-between gap-4 rounded-3xl border border-white bg-white/80 p-4 shadow-sm sm:flex-row dark:border-slate-800 dark:bg-slate-900/70">
+      <p className="text-sm text-slate-500 dark:text-slate-400">
+        Página <strong className="text-slate-900 dark:text-slate-100">{page}</strong> de{' '}
+        <strong className="text-slate-900 dark:text-slate-100">{totalPages}</strong> · {total}{' '}
+        {total === 1 ? 'herói' : 'heróis'}
         {isLoading && (
-          <span className="ml-2 inline-flex items-center gap-1 text-indigo-600">
+          <span className="ml-2 inline-flex items-center gap-1 text-indigo-600 dark:text-indigo-300">
             <Loader2 className="h-3.5 w-3.5 animate-spin" />
             carregando
           </span>
