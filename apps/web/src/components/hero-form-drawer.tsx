@@ -106,7 +106,7 @@ export function HeroFormDrawer({ open, mode, hero, isSubmitting, onOpenChange, o
               </FormField>
             </div>
 
-            <div className="flex flex-col-reverse gap-3 border-t border-slate-100 pt-5 sm:flex-row sm:justify-end">
+            <div className="flex flex-col-reverse gap-3 border-t border-slate-100 pt-5 sm:flex-row sm:justify-end dark:border-slate-800">
               <Button type="button" variant="secondary" onClick={() => onOpenChange(false)} disabled={isSubmitting}>
                 Cancelar
               </Button>
@@ -128,7 +128,7 @@ interface ReadonlyHeroSummaryProps {
 
 function ReadonlyHeroSummary({ hero }: ReadonlyHeroSummaryProps) {
   return (
-    <div className="grid gap-3 rounded-3xl border border-slate-200 bg-slate-50 p-4 text-sm sm:grid-cols-2">
+    <div className="grid gap-3 rounded-3xl border border-slate-200 bg-slate-50 p-4 text-sm sm:grid-cols-2 dark:border-slate-800 dark:bg-slate-900/70">
       <ReadonlyItem label="ID" value={hero.id} />
       <ReadonlyItem label="Status" value={hero.is_active ? 'Ativo' : 'Inativo'} />
       <ReadonlyItem label="Criado em" value={formatDateTime(hero.created_at)} />
@@ -145,8 +145,8 @@ interface ReadonlyItemProps {
 function ReadonlyItem({ label, value }: ReadonlyItemProps) {
   return (
     <div className="min-w-0">
-      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">{label}</p>
-      <p className="truncate font-semibold text-slate-700" title={value}>
+      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400 dark:text-slate-500">{label}</p>
+      <p className="truncate font-semibold text-slate-700 dark:text-slate-200" title={value}>
         {value}
       </p>
     </div>
@@ -161,10 +161,10 @@ interface FormFieldProps {
 
 function FormField({ label, error, children }: FormFieldProps) {
   return (
-    <label className="grid gap-2 text-sm font-semibold text-slate-700">
+    <label className="grid gap-2 text-sm font-semibold text-slate-700 dark:text-slate-200">
       {label}
       {children}
-      {error && <span className="text-xs font-medium text-rose-600">{error}</span>}
+      {error && <span className="text-xs font-medium text-rose-600 dark:text-rose-300">{error}</span>}
     </label>
   );
 }
