@@ -1,27 +1,29 @@
-import type { NextFunction, Request, Response } from 'express';
+import type { ErrorRequestHandler } from 'express';
 import { ZodError } from 'zod';
 import { AppError } from '../../../domain/errors/app-error.js';
 
-export function errorHandler(error: Error, _request: Request, response: Response, _next: NextFunction) {
+export const errorHandler: ErrorRequestHandler = (error, _request, response, _next) => {
   if (error instanceof ZodError) {
-    return response.status(400).json({
+    response.status(400).json({
       message: 'Dados inválidos. Revise os campos enviados.',
       code: 'VALIDATION_ERROR',
       issues: error.flatten().fieldErrors
     });
+    return;
   }
 
   if (error instanceof AppError) {
-    return response.status(error.statusCode).json({
+    response.status(error.statusCode).json({
       message: error.message,
       code: error.code
     });
+    return;
   }
 
   console.error(error);
 
-  return response.status(500).json({
+  response.status(500).json({
     message: 'Erro interno no servidor. Tente novamente em instantes.',
     code: 'INTERNAL_SERVER_ERROR'
   });
-}
+};

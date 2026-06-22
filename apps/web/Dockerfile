@@ -1,12 +1,14 @@
 FROM node:22-alpine AS deps
 WORKDIR /app
+ENV NODE_ENV=development
 COPY package.json package-lock.json ./
 COPY apps/api/package.json apps/api/package.json
 COPY apps/web/package.json apps/web/package.json
-RUN npm ci --no-audit --no-fund
+RUN npm ci --include=dev --no-audit --no-fund
 
 FROM node:22-alpine AS builder
 WORKDIR /app
+ENV NODE_ENV=development
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 ARG VITE_API_URL
