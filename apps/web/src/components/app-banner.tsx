@@ -1,5 +1,6 @@
 import type * as React from 'react';
 import { ArrowRight, Sparkles } from 'lucide-react';
+import { ThemeToggle } from './theme-toggle';
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
 
@@ -12,14 +13,17 @@ interface AppBannerProps {
 
 export function AppBanner({ activeCount, inactiveCount, totalCount, onCreate }: AppBannerProps) {
   return (
-    <section className="relative overflow-hidden rounded-[2rem] border border-indigo-200/60 bg-slate-950 text-white shadow-glow">
+    <section className="relative overflow-hidden rounded-[2rem] border border-indigo-200/60 bg-slate-950 text-white shadow-glow dark:border-indigo-400/20">
       <div className="absolute inset-0 bg-hero-grid bg-[size:40px_40px] opacity-[0.14]" />
       <div className="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-indigo-500/30 blur-3xl" />
       <div className="absolute -bottom-20 left-1/4 h-48 w-48 rounded-full bg-violet-500/20 blur-3xl" />
+      <div className="absolute right-4 top-4 z-20">
+        <ThemeToggle />
+      </div>
 
       <div className="relative p-6 md:p-10">
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-          <div className="max-w-2xl">
+          <div className="max-w-2xl pr-12 sm:pr-16">
             <Badge className="mb-4 border-white/15 bg-white/10 text-white hover:bg-white/15">
               <Sparkles className="mr-1 h-3.5 w-3.5" /> Hero Factory
             </Badge>
@@ -27,11 +31,10 @@ export function AppBanner({ activeCount, inactiveCount, totalCount, onCreate }: 
               O lugar onde os heróis entram em cena.
             </h1>
             <p className="mt-4 max-w-xl text-base leading-7 text-slate-300">
-              Cadastre, busque e organize o time sem planilha nem dor de cabeça. Tudo num painel só, do jeito que
-              deveria ser.
+              Cadastre, busque e organize o time sem planilha. Tudo num painel só, do jeito que deveria ser.
             </p>
             <Button
-              className="mt-6 h-12 rounded-2xl bg-white px-6 text-slate-950 hover:bg-slate-100"
+              className="mt-6 h-12 rounded-2xl bg-white px-6 text-slate-950 hover:bg-slate-100 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200"
               onClick={onCreate}
             >
               Cadastrar herói <ArrowRight className="h-4 w-4" />
