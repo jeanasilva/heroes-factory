@@ -46,8 +46,8 @@ export function HeroDetailsDrawer({ hero, open, onOpenChange }: HeroDetailsDrawe
             <DetailItem icon={Clock3} label="Atualizado em" value={formatDateTime(hero.updated_at)} />
           </div>
 
-          <div className="mt-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
-            <div className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
+          <div className="mt-4 rounded-2xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-900/70">
+            <div className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate-400 dark:text-slate-500">
               <ImageIcon className="h-4 w-4" />
               Avatar
             </div>
@@ -55,14 +55,14 @@ export function HeroDetailsDrawer({ hero, open, onOpenChange }: HeroDetailsDrawe
               href={hero.avatar_url}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 break-all text-sm font-medium text-indigo-600 hover:text-indigo-800"
+              className="inline-flex items-center gap-2 break-all text-sm font-medium text-indigo-600 hover:text-indigo-800 dark:text-indigo-300 dark:hover:text-indigo-200"
             >
               <Link2 className="h-4 w-4 shrink-0" />
               {hero.avatar_url}
             </a>
           </div>
 
-          <div className="mt-4 flex items-start gap-2 rounded-2xl bg-slate-950 px-4 py-3 text-sm text-slate-200">
+          <div className="mt-4 flex items-start gap-2 rounded-2xl bg-slate-950 px-4 py-3 text-sm text-slate-200 dark:bg-slate-900 dark:ring-1 dark:ring-slate-800">
             <Globe2 className="mt-0.5 h-4 w-4 shrink-0 text-slate-400" />
             <p>Heróis excluídos continuam no histórico. Se precisar editar de novo, é só reativar pelo menu do card.</p>
           </div>
@@ -81,12 +81,12 @@ interface DetailItemProps {
 
 function DetailItem({ icon: Icon, label, value, mono = false }: DetailItemProps) {
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-      <div className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
+    <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900/80">
+      <div className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate-400 dark:text-slate-500">
         <Icon className="h-4 w-4" />
         {label}
       </div>
-      <p className={`text-sm font-semibold text-slate-900 ${mono ? 'break-all font-mono text-xs leading-6' : ''}`}>{value}</p>
+      <p className={`text-sm font-semibold text-slate-900 dark:text-slate-100 ${mono ? 'break-all font-mono text-xs leading-6' : ''}`}>{value}</p>
     </div>
   );
 }
