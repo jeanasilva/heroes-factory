@@ -4,15 +4,16 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl text-sm font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 disabled:pointer-events-none disabled:opacity-50',
+  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl text-sm font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 disabled:pointer-events-none disabled:opacity-50 dark:focus-visible:ring-indigo-300',
   {
     variants: {
       variant: {
-        default: 'bg-slate-950 text-white shadow-sm hover:bg-slate-800',
-        secondary: 'bg-white text-slate-900 shadow-sm ring-1 ring-slate-200 hover:bg-slate-50',
-        ghost: 'text-slate-700 hover:bg-slate-100',
-        destructive: 'bg-rose-600 text-white hover:bg-rose-700',
-        success: 'bg-emerald-600 text-white hover:bg-emerald-700'
+        default: 'bg-slate-950 text-white shadow-sm hover:bg-slate-800 dark:bg-indigo-500 dark:text-white dark:hover:bg-indigo-400',
+        secondary:
+          'bg-white text-slate-900 shadow-sm ring-1 ring-slate-200 hover:bg-slate-50 dark:bg-slate-900 dark:text-slate-100 dark:ring-slate-700 dark:hover:bg-slate-800',
+        ghost: 'text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800',
+        destructive: 'bg-rose-600 text-white hover:bg-rose-700 dark:bg-rose-500 dark:hover:bg-rose-400',
+        success: 'bg-emerald-600 text-white hover:bg-emerald-700 dark:bg-emerald-500 dark:hover:bg-emerald-400'
       },
       size: {
         default: 'h-11 px-5',
