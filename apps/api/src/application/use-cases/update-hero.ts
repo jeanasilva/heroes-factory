@@ -10,7 +10,7 @@ export class UpdateHeroUseCase {
     const hero = await this.heroesRepository.findById(id);
 
     if (!hero) {
-      throw new NotFoundError('Hero');
+      throw new NotFoundError('Herói');
     }
 
     if (!hero.is_active) {

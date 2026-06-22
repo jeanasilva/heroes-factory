@@ -9,7 +9,7 @@ export class DeactivateHeroUseCase {
     const hero = await this.heroesRepository.findById(id);
 
     if (!hero) {
-      throw new NotFoundError('Hero');
+      throw new NotFoundError('Herói');
     }
 
     return this.heroesRepository.deactivate(id);

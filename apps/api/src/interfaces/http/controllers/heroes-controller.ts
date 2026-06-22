@@ -5,7 +5,7 @@ import { DeactivateHeroUseCase } from '../../../application/use-cases/deactivate
 import { GetHeroByIdUseCase } from '../../../application/use-cases/get-hero-by-id.js';
 import { ListHeroesUseCase } from '../../../application/use-cases/list-heroes.js';
 import { UpdateHeroUseCase } from '../../../application/use-cases/update-hero.js';
-import { PrismaHeroesRepository } from '../../../infra/database/prisma/repositories/prisma-heroes-repository.js';
+import type { HeroesRepository } from '../../../application/repositories/heroes-repository.js';
 import { HeroPresenter } from '../presenters/hero-presenter.js';
 import {
   createHeroSchema,
@@ -14,12 +14,12 @@ import {
   updateHeroSchema
 } from '../validators/hero-schemas.js';
 
-const heroesRepository = new PrismaHeroesRepository();
-
 export class HeroesController {
+  constructor(private readonly heroesRepository: HeroesRepository) {}
+
   async create(request: Request, response: Response) {
     const { body } = createHeroSchema.parse({ body: request.body });
-    const createHero = new CreateHeroUseCase(heroesRepository);
+    const createHero = new CreateHeroUseCase(this.heroesRepository);
     const hero = await createHero.execute(body);
 
     return response.status(201).json(HeroPresenter.toHTTP(hero));
@@ -27,7 +27,7 @@ export class HeroesController {
 
   async list(request: Request, response: Response) {
     const { query } = listHeroesSchema.parse({ query: request.query });
-    const listHeroes = new ListHeroesUseCase(heroesRepository);
+    const listHeroes = new ListHeroesUseCase(this.heroesRepository);
     const result = await listHeroes.execute(query);
 
     return response.json({
@@ -38,7 +38,7 @@ export class HeroesController {
 
   async show(request: Request, response: Response) {
     const { params } = heroIdParamsSchema.parse({ params: request.params });
-    const getHeroById = new GetHeroByIdUseCase(heroesRepository);
+    const getHeroById = new GetHeroByIdUseCase(this.heroesRepository);
     const hero = await getHeroById.execute(params.id);
 
     return response.json(HeroPresenter.toHTTP(hero));
@@ -46,7 +46,7 @@ export class HeroesController {
 
   async update(request: Request, response: Response) {
     const { body, params } = updateHeroSchema.parse({ body: request.body, params: request.params });
-    const updateHero = new UpdateHeroUseCase(heroesRepository);
+    const updateHero = new UpdateHeroUseCase(this.heroesRepository);
     const hero = await updateHero.execute(params.id, body);
 
     return response.json(HeroPresenter.toHTTP(hero));
@@ -54,7 +54,7 @@ export class HeroesController {
 
   async deactivate(request: Request, response: Response) {
     const { params } = heroIdParamsSchema.parse({ params: request.params });
-    const deactivateHero = new DeactivateHeroUseCase(heroesRepository);
+    const deactivateHero = new DeactivateHeroUseCase(this.heroesRepository);
     const hero = await deactivateHero.execute(params.id);
 
     return response.json(HeroPresenter.toHTTP(hero));
@@ -62,7 +62,7 @@ export class HeroesController {
 
   async activate(request: Request, response: Response) {
     const { params } = heroIdParamsSchema.parse({ params: request.params });
-    const activateHero = new ActivateHeroUseCase(heroesRepository);
+    const activateHero = new ActivateHeroUseCase(this.heroesRepository);
     const hero = await activateHero.execute(params.id);
 
     return response.json(HeroPresenter.toHTTP(hero));

@@ -2,14 +2,15 @@ import type { HTMLAttributes } from 'react';
 import { cn } from '@/lib/utils';
 
 interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
-  variant?: 'default' | 'muted' | 'success' | 'danger';
+  variant?: 'default' | 'muted' | 'success' | 'danger' | 'universe';
 }
 
 const variants = {
   default: 'bg-slate-950 text-white',
   muted: 'bg-slate-100 text-slate-600',
   success: 'bg-emerald-100 text-emerald-700',
-  danger: 'bg-rose-100 text-rose-700'
+  danger: 'bg-rose-100 text-rose-700',
+  universe: 'bg-white/90 text-slate-800 shadow-sm backdrop-blur'
 };
 
 export function Badge({ className, variant = 'default', ...props }: BadgeProps) {

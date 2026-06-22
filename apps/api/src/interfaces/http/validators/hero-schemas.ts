@@ -7,7 +7,7 @@ function parseDate(value: string): Date {
   const date = new Date(normalized);
 
   if (Number.isNaN(date.getTime())) {
-    throw new Error('Invalid date.');
+    throw new Error('Data inválida.');
   }
 
   return date;
@@ -16,7 +16,7 @@ function parseDate(value: string): Date {
 const heroFieldsSchema = z.object({
   name: z.string().trim().min(2).max(120),
   nickname: z.string().trim().min(2).max(80),
-  date_of_birth: z.string().regex(dateRegex, 'Use YYYY-MM-DD or YYYY-MM-DD HH:mm:ss.').transform(parseDate),
+  date_of_birth: z.string().regex(dateRegex, 'Use YYYY-MM-DD ou YYYY-MM-DD HH:mm:ss.').transform(parseDate),
   universe: z.string().trim().min(2).max(80),
   main_power: z.string().trim().min(2).max(120),
   avatar_url: z.string().trim().url().max(2048)
@@ -28,7 +28,7 @@ export const createHeroSchema = z.object({
 
 export const updateHeroSchema = z.object({
   body: heroFieldsSchema.partial().refine((data) => Object.keys(data).length > 0, {
-    message: 'At least one field must be sent.'
+    message: 'Envie ao menos um campo para atualizar.'
   }),
   params: z.object({
     id: z.string().uuid()

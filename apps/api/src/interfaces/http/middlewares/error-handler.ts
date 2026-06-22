@@ -5,7 +5,7 @@ import { AppError } from '../../../domain/errors/app-error.js';
 export function errorHandler(error: Error, _request: Request, response: Response, _next: NextFunction) {
   if (error instanceof ZodError) {
     return response.status(400).json({
-      message: 'Validation failed.',
+      message: 'Dados inválidos. Revise os campos enviados.',
       code: 'VALIDATION_ERROR',
       issues: error.flatten().fieldErrors
     });
@@ -21,7 +21,7 @@ export function errorHandler(error: Error, _request: Request, response: Response
   console.error(error);
 
   return response.status(500).json({
-    message: 'Internal server error.',
+    message: 'Erro interno no servidor. Tente novamente em instantes.',
     code: 'INTERNAL_SERVER_ERROR'
   });
 }
