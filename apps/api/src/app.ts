@@ -9,7 +9,20 @@ import { routes } from './interfaces/http/routes.js';
 export function buildApp() {
   const app = express();
 
-  app.use(helmet());
+  app.use(
+    helmet({
+      contentSecurityPolicy: {
+        directives: {
+          defaultSrc: ["'self'"],
+          scriptSrc: ["'self'", "'unsafe-inline'", 'https://cdn.jsdelivr.net'],
+          styleSrc: ["'self'", "'unsafe-inline'", 'https://cdn.jsdelivr.net'],
+          imgSrc: ["'self'", 'data:', 'https://validator.swagger.io'],
+          connectSrc: ["'self'"],
+          fontSrc: ["'self'", 'https://cdn.jsdelivr.net']
+        }
+      }
+    })
+  );
   app.use(
     cors({
       origin: env.NODE_ENV === 'production' ? env.FRONTEND_URL : true
