@@ -19,12 +19,12 @@ export function HeroCard({ hero, onView, onEdit, onDeactivate, onActivate }: Her
   return (
     <article
       className={cn(
-        'group relative overflow-hidden rounded-3xl border bg-white shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-lg',
-        isInactive ? 'border-slate-200 opacity-90' : 'border-slate-100'
+        'group relative overflow-hidden rounded-3xl border bg-white shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-lg dark:bg-slate-900/90 dark:shadow-slate-950/30 dark:hover:shadow-indigo-950/30',
+        isInactive ? 'border-slate-200 opacity-90 dark:border-slate-800' : 'border-slate-100 dark:border-slate-800/80'
       )}
     >
       <button type="button" className="block w-full text-left" onClick={() => onView(hero)}>
-        <div className="relative h-48 overflow-hidden bg-slate-200">
+        <div className="relative h-48 overflow-hidden bg-slate-200 dark:bg-slate-800">
           <img
             src={hero.avatar_url}
             alt={hero.nickname}
@@ -49,8 +49,8 @@ export function HeroCard({ hero, onView, onEdit, onDeactivate, onActivate }: Her
       <div className="space-y-3 p-4">
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">Poder principal</p>
-            <p className="line-clamp-2 font-semibold text-slate-800">{hero.main_power}</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400 dark:text-slate-500">Poder principal</p>
+            <p className="line-clamp-2 font-semibold text-slate-800 dark:text-slate-100">{hero.main_power}</p>
           </div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -67,7 +67,7 @@ export function HeroCard({ hero, onView, onEdit, onDeactivate, onActivate }: Her
                   <Power className="h-4 w-4" /> Reativar
                 </DropdownMenuItem>
               ) : (
-                <DropdownMenuItem className="text-rose-600 focus:text-rose-600" onClick={() => onDeactivate(hero)}>
+                <DropdownMenuItem className="text-rose-600 focus:text-rose-600 dark:text-rose-300 dark:focus:text-rose-200" onClick={() => onDeactivate(hero)}>
                   <Trash2 className="h-4 w-4" /> Excluir
                 </DropdownMenuItem>
               )}
@@ -75,7 +75,7 @@ export function HeroCard({ hero, onView, onEdit, onDeactivate, onActivate }: Her
           </DropdownMenu>
         </div>
 
-        <p className="text-xs text-slate-400">Entrou em {formatDate(hero.created_at)}</p>
+        <p className="text-xs text-slate-400 dark:text-slate-500">Entrou em {formatDate(hero.created_at)}</p>
       </div>
     </article>
   );
